@@ -1,0 +1,9 @@
+
+.add-member-image-form .ant-upload {
+    height: 160px;
+    width: 160px;
+}
+
+.add-member-image-form img {
+    width: 100%;
+}
