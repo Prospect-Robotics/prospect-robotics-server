@@ -4,22 +4,30 @@
  * Module dependencies.
  */
 
+const express = require('express');
+
 var app = require('../app');
 var debug = require('debug')('prospect-robotics-server:server');
-var http = require('http');
+// var http = require('http');
+const https = require('https');
+const fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+let port = normalizePort(process.env.PORT || '3000');
+app.set('port', 8080);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+let server = https.createServer({
+  key: fs.readFileSync('./key.pem'),
+  cert: fs.readFileSync('./cert.pem'),
+  passphrase: '2813'
+}, app);
 
 /**
  * Listen on provided port, on all network interfaces.

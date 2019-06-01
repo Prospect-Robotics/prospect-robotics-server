@@ -4,7 +4,6 @@ import Input from "antd/es/input";
 import Button from "antd/es/button";
 import {Col, Icon, message, Row, Select, Upload} from 'antd';
 import TextArea from "antd/es/input/TextArea";
-import missing from "../images/missing.svg";
 
 const {Option} = Select;
 
@@ -108,11 +107,10 @@ class AddMemberImage extends Component {
 
   render() {
     const {
-      getFieldDecorator, getFieldsError, getFieldError, isFieldTouched,
+      getFieldDecorator, getFieldError, isFieldTouched,
     } = this.props.form;
 
     const nameError = isFieldTouched('name') && getFieldError('name');
-    const fileError = isFieldTouched('file') && getFieldError('file');
 
     const imageUrl = this.state.imageUrl;
 
