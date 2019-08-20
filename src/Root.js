@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles/root.css';
 import 'antd/dist/antd.css';
-import MemberImages from "./components/MemberImages";  // or 'antd/dist/antd.less'
+import MemberImages from "./components/MemberImages";
+import BlogPosts from "./components/BlogPosts";
 
 function Root() {
   return (
@@ -9,6 +10,7 @@ function Root() {
       <h1 className={'title'}>
         Prospect Website Server
       </h1>
+      <BlogPosts/>
       <MemberImages/>
     </div>
   );

@@ -3,7 +3,10 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-const imagesDirectory = path.join(__dirname, '../images/members');
+const imagesDirectory = path.join(__dirname, '../data/images/members');
+const membersPath = path.join(__dirname, '../data/members.json');
+
+const blogPath = path.join(__dirname, '../data/blog.json');
 
 const ID = () => {
   // Math.random should be unique because of its seeding algorithm.
@@ -14,8 +17,7 @@ const ID = () => {
 
 router.post('/upload', function (req, res) {
   if (req.files === null || Object.keys(req.files).length === 0) {
-    let membersFile = fs.readFileSync(path.join(imagesDirectory, '../members.json'));
-    let membersJson = JSON.parse(membersFile);
+    let membersJson = JSON.parse(fs.readFileSync(membersPath, 'utf8'));
 
     Object.assign(membersJson.members[req.body.id], {
       name: req.body.name,
@@ -26,7 +28,7 @@ router.post('/upload', function (req, res) {
     if (req.body.position !== 'member')
       membersJson[req.body.position] = membersJson.members[req.body.id];
 
-    fs.writeFileSync(path.join(imagesDirectory, '../members.json'), JSON.stringify(membersJson));
+    fs.writeFileSync(membersPath, JSON.stringify(membersJson));
 
     return res.status(200).send('No files were uploaded.');
   }
@@ -41,8 +43,7 @@ router.post('/upload', function (req, res) {
       return res.status(500).send(err);
     }
 
-    let membersFile = fs.readFileSync(path.join(imagesDirectory, '../members.json'));
-    let membersJson = JSON.parse(membersFile);
+    let membersJson = JSON.parse(fs.readFileSync(membersPath, 'utf8'));
 
     let newId = ID();
 
@@ -63,14 +64,14 @@ router.post('/upload', function (req, res) {
     if (member.position !== 'member')
       membersJson[member.position] = member;
 
-    fs.writeFileSync(path.join(imagesDirectory, '../members.json'), JSON.stringify(membersJson));
+    fs.writeFileSync(membersPath, JSON.stringify(membersJson));
 
     res.send(member);
   });
 });
 
 router.get('/memberImages', function (req, res) {
-  res.sendFile(path.join(imagesDirectory, '../members.json'));
+  res.sendFile(membersPath);
 });
 
 router.get('/memberImages/:imageName', function (req, res) {
@@ -78,26 +79,77 @@ router.get('/memberImages/:imageName', function (req, res) {
 });
 
 router.delete('/memberImages/:memberId', function (req, res) {
-  let membersFile = fs.readFileSync(path.join(imagesDirectory, '../members.json'));
-  let membersJson = JSON.parse(membersFile);
+  let membersJson = JSON.parse(fs.readFileSync(membersPath, 'utf8'));
 
-  if (membersJson.members[req.params.memberId].position !== 'member')
-    membersJson[membersJson.members[req.params.memberId].position] = {};
+  let position = membersJson.members[req.params.memberId].position;
+  if (position !== 'member' || position !== 'mentor')
+    membersJson[position] = {};
 
   delete membersJson.members[req.params.memberId];
 
-  fs.writeFileSync(path.join(imagesDirectory, '../members.json'), JSON.stringify(membersJson));
+  fs.writeFileSync(membersPath, JSON.stringify(membersJson));
 
   res.status(200).send();
 });
 
-router.post('/memberImages/:position', function (req, res) {
-  let membersFile = fs.readFileSync(path.join(imagesDirectory, '../members.json'));
-  let membersJson = JSON.parse(membersFile);
+router.post('/blog', (req, res) => {
+  // if there are no photos, directly update the json
+  if (req.files === null || Object.keys(req.files).length === 0) {
+    let blogJson = JSON.parse(fs.readFileSync(blogPath, 'utf8')); // read json
 
-  console.log(req.body.name);
+    let id = req.body.id || ID();
 
+    blogJson[id] = Object.assign(blogJson[id] || {}, { // assign new data
+      id,
+      title: req.body.title,
+      date: req.body.date,
+      content: req.body.content
+    });
+
+    fs.writeFileSync(blogPath, JSON.stringify(blogJson)); // write to file
+
+    return res.status(200).send('No files were uploaded.');
+  }
+
+  // moving sent file into directory data/images/blog
+  let file = req.files.file;
+  file.mv(path.join(__dirname, `../data/images/blog/${req.body.fileName}`), function (err) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send(err);
+    }
+
+    let blogJson = JSON.parse(fs.readFileSync(blogPath, 'utf8')); // read json
+
+    let id = req.body.id || ID();
+
+    blogJson[id] = { // assign new data
+      id,
+      src: '/blogImages/' + req.body.fileName,
+      title: req.body.title,
+      date: req.body.date,
+      content: req.body.content
+    };
+
+    fs.writeFileSync(blogPath, JSON.stringify(blogJson)); // write to file
+
+    res.send(blogJson[id]);
+  });
+});
+
+router.delete('/blog/:id', (req, res) => {
+  let blogJson = JSON.parse(fs.readFileSync(blogPath, 'utf8')); // read json
+  delete blogJson[req.params.id]; // delete
+  fs.writeFileSync(blogPath, JSON.stringify(blogJson)); // write to file;
   res.status(200).send();
+});
+
+router.get('/blogImages/', (req, res) => {
+  res.sendFile(blogPath);
+});
+
+router.get('/blogImages/:imageName', function (req, res) {
+  res.sendFile(path.join(__dirname, `../data/images/blog/${req.params.imageName}`));
 });
 
 module.exports = router;

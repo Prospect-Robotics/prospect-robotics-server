@@ -179,6 +179,7 @@ class AddMemberImage extends Component {
                   <Option value="vicePresident">Vice President</Option>
                   <Option value="treasurer">Treasurer</Option>
                   <Option value="secretary">Secretary</Option>
+                  <Option value="mentor">Mentor</Option>
                 </Select>
               )}
             </Form.Item>

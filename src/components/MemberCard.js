@@ -35,6 +35,8 @@ const MemberCard = ({member, onDelete, onEdit}) => {
               return "Treasurer";
             case "secretary":
               return "Secretary";
+            case "mentor":
+              return "Mentor";
             default:
               return "Member";
           }

@@ -88,7 +88,6 @@ class MemberImages extends Component {
                                 });
                                 this.fetchMemberImages();
                               }}/>
-        })}/>
       </div>
     )
   }
