@@ -17,7 +17,7 @@ const fs = require('fs');
  */
 
 let port = normalizePort(process.env.PORT || '3000');
-app.set('port', 8080);
+app.set('port', 3000);
 
 /**
  * Create HTTP server.

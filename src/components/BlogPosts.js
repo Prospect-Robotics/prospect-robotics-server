@@ -34,7 +34,7 @@ class BlogPosts extends Component {
                   onClick={() => this.setState({newBlogPostVisible: true})}>New Post</Button>
         </div>
         <Collapse accordian style={{clear: 'both'}}>
-          {Object.keys(posts).map(key => (
+          {Object.keys(posts).reverse().map(key => (
             <Collapse.Panel header={this.state.posts[key].title} key={this.state.posts[key].id}>
               <Post post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
             </Collapse.Panel>

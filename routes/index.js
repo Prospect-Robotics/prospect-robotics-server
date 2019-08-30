@@ -3,6 +3,8 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
+const moment = require('moment');
+
 const imagesDirectory = path.join(__dirname, '../data/images/members');
 const membersPath = path.join(__dirname, '../data/members.json');
 
@@ -102,7 +104,7 @@ router.post('/blog', (req, res) => {
     blogJson[id] = Object.assign(blogJson[id] || {}, { // assign new data
       id,
       title: req.body.title,
-      date: req.body.date,
+      date: moment(req.body.date).unix(),
       content: req.body.content
     });
 
@@ -127,7 +129,7 @@ router.post('/blog', (req, res) => {
       id,
       src: '/blogImages/' + req.body.fileName,
       title: req.body.title,
-      date: req.body.date,
+      date: moment(req.body.date).unix(),
       content: req.body.content
     };
 
