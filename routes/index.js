@@ -104,7 +104,7 @@ router.post('/blog', (req, res) => {
     blogJson[id] = Object.assign(blogJson[id] || {}, { // assign new data
       id,
       title: req.body.title,
-      date: moment(req.body.date).unix(),
+      date: moment(req.body.date).milliseconds(),
       content: req.body.content
     });
 
@@ -129,7 +129,7 @@ router.post('/blog', (req, res) => {
       id,
       src: '/blogImages/' + req.body.fileName,
       title: req.body.title,
-      date: moment(req.body.date).unix(),
+      date: moment(req.body.date).milliseconds(),
       content: req.body.content
     };
 
