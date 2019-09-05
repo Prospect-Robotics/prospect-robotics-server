@@ -104,7 +104,7 @@ router.post('/blog', (req, res) => {
     blogJson[id] = Object.assign(blogJson[id] || {}, { // assign new data
       id,
       title: req.body.title,
-      date: moment(req.body.date).milliseconds(),
+      date: req.body.date,
       content: req.body.content
     });
 
@@ -124,12 +124,11 @@ router.post('/blog', (req, res) => {
     let blogJson = JSON.parse(fs.readFileSync(blogPath, 'utf8')); // read json
 
     let id = req.body.id || ID();
-
     blogJson[id] = { // assign new data
       id,
       src: '/blogImages/' + req.body.fileName,
       title: req.body.title,
-      date: moment(req.body.date).milliseconds(),
+      date: req.body.date,
       content: req.body.content
     };
 
