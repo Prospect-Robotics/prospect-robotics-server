@@ -46,7 +46,7 @@ class Sponsors extends Component {
       console.log('Received values of form: ', values);
       this.updateSponsor(values);
       setTimeout(() => this.sponsorFormRef.resetFields, 300);
-      this.setState({modalVisible: false});
+      this.setState({modalVisible: false, selectedSponsor: undefined});
     });
   }
 

@@ -12,7 +12,7 @@ function getBase64(img, callback) {
 function beforeUpload(file) {
   const isJPG = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/svg';
   if (!isJPG) {
-    message.error('You can only upload JPG file!');
+    message.error('You can only upload JPG, PNG, or SVG file!');
   }
   return isJPG;
 }
@@ -53,9 +53,9 @@ class SponsorModal extends Component {
       </div>
     );
     if (sponsor.src)
-      image = <img style={{width: "100%", maxWidth: 512, margin: "0 auto"}} src={sponsor.src} alt=" "/>;
+      image = <img style={{width: "100%", maxWidth: 256, margin: "0 auto"}} src={sponsor.src} alt=" "/>;
     if (this.state.imageUrl)
-      image = <img style={{width: "100%", maxWidth: 512, margin: "0 auto"}} src={this.state.imageUrl} alt="avatar"/>;
+      image = <img style={{width: "100%", maxWidth: 256, margin: "0 auto"}} src={this.state.imageUrl} alt="avatar"/>;
 
     return (
       <Modal title={"Sponsor"} visible={visible} onCancel={() => {

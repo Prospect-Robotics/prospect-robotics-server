@@ -50,6 +50,7 @@ class MemberImages extends Component {
 
     return (
       <div className={"member-images"}>
+        <h1>Members</h1>
         <Row>
           <Col xs={24} md={8}>
             <AddMemberImage onAdd={this.handleAddMember.bind(this)}/>
