@@ -67,6 +67,14 @@ class Sponsors extends Component {
       });
   }
 
+  handleDeleteSponsor(id) {
+    fetch('/sponsors/' + id, {
+      method: 'DELETE'
+    }).then(() => {
+      this.getSponsors();
+    });
+  }
+
   componentDidMount() {
     this.getSponsors();
   }
@@ -88,29 +96,33 @@ class Sponsors extends Component {
                 <Col xs={24} sm={2}>
                   <h2>{year}</h2>
                 </Col>
-                <Col xs={24} sm={{span: 21, offset: 1}} >
-                  {Object.keys(this.state.sponsors[year]).map(id => {
-                    let sponsor = this.state.sponsors[year][id];
-                    return (
-                      <Col xs={8} sm={6} md={4} lg={3} xl={2} key={id} className={"sponsor"}>
-                        {sponsor.src ? (
-                          <Col xs={24} style={{marginBottom: 12}}>
-                            <img src={sponsor.src} alt="" style={{width: '100%'}}/>
+                <Col xs={24} sm={{span: 21, offset: 1}}>
+                  <Row gutter={8}>
+                    {Object.keys(this.state.sponsors[year]).map(id => {
+                      let sponsor = this.state.sponsors[year][id];
+                      return (
+                        <Col xs={8} sm={6} md={4} lg={3} xl={2} key={id} className={"sponsor"}>
+                          {sponsor.src ? (
+                            <Col xs={24} style={{marginBottom: 12}}>
+                              <img src={sponsor.src} alt="" style={{width: '100%'}}/>
+                            </Col>
+                          ) : ""}
+                          <Col xs={24} style={{textAlign: 'center'}}>
+                            <Text>{sponsor.name}</Text><br/>
+                            <Text type={"secondary"}>{sponsor.description}</Text>
                           </Col>
-                        ) : ""}
-                        <Col xs={24} style={{textAlign: 'center'}}>
-                          <Text>{sponsor.name}</Text><br/>
-                          <Text type={"secondary"}>{sponsor.description}</Text>
+                          <Button shape="circle" icon={"edit"} className="edit-sponsor" onClick={() => {
+                            this.setState({
+                              selectedSponsor: sponsor,
+                              modalVisible: true
+                            })
+                          }}/>
+                          <Button shape="circle" icon={"delete"} className="delete-sponsor"
+                                  onClick={() => this.handleDeleteSponsor(sponsor.id)}/>
                         </Col>
-                        <Button shape="circle" icon={"edit"} className="edit-sponsor" onClick={() => {
-                          this.setState({
-                            selectedSponsor: sponsor,
-                            modalVisible: true
-                          })
-                        }}/>
-                      </Col>
-                    );
-                  })}
+                      );
+                    })}
+                  </Row>
                 </Col>
               </div>
             </Timeline.Item>

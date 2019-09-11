@@ -10,7 +10,11 @@ function getBase64(img, callback) {
 }
 
 function beforeUpload(file) {
-  const isJPG = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/svg';
+  if (file.type.startsWith('image/svg')) {
+    return 'svg';
+  }
+
+  const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJPG) {
     message.error('You can only upload JPG, PNG, or SVG file!');
   }
@@ -25,9 +29,7 @@ class SponsorModal extends Component {
     this.props.form.resetFields();
   }
 
-  dummyRequest = ({file, onSuccess}) => {
-    console.log(file);
-
+  dummyRequest = ({onSuccess}) => {
     setTimeout(() => {
       onSuccess("ok");
     }, 0);

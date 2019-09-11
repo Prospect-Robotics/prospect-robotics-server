@@ -2,20 +2,34 @@
     overflow: hidden;
 }
 
-.sponsors .edit-sponsor {
+.sponsors .edit-sponsor, .sponsors .delete-sponsor {
     position: absolute;
-    top: 0;
     right: 0;
-
-    opacity: 0;
     cursor: pointer;
-    transform: translate(8px, -8px);
     transition: all 300ms;
+    opacity: 0;
+}
+
+.sponsors .edit-sponsor {
+    top: 0;
+    transform: translate(8px, -8px);
+}
+
+.sponsors .delete-sponsor {
+    bottom: 0;
+    transform: translate(8px, 8px);
+}
+
+.sponsors .sponsor:hover .edit-sponsor, .sponsors .sponsor:hover .delete-sponsor {
+    overflow: hidden;
+    transform: translate(0, 0);
+    opacity: 1;
 }
 
 .sponsors .sponsor:hover .edit-sponsor {
-    overflow: hidden;
-    transform: translate(0, 0);
     color: #1890FF;
-    opacity: 1;
+}
+
+.sponsors .sponsor:hover .delete-sponsor {
+    color: #FF4D4F;
 }

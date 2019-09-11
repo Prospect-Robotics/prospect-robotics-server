@@ -24,6 +24,8 @@ yarn-error.log*
 
 /data/images/members.json
 /data/images/members/*.jpg
+/data/images/members/*.png
+/data/images/members/*.svg
 
 /data/blog.json
 /data/images/blog/*.jpg
@@ -34,3 +36,5 @@ yarn-error.log*
 
 /data/sponsors.json
 /data/images/sponsors/*.jpg
+/data/images/sponsors/*.png
+/data/images/sponsors/*.svg
