@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Button, Collapse} from "antd";
 import EditBuildLogPost from "./EditBuildLogPost.js";
-import Post from "./Post";
+import BuildLog from "./BuildLog";
 
-class BlogPosts extends Component {
+class BuildLogPosts extends Component {
   state = {
     posts: {},
     newBuildLogPostVisible: false
@@ -36,7 +36,7 @@ class BlogPosts extends Component {
         <Collapse accordian style={{clear: 'both'}}>
           {Object.keys(posts).reverse().map(key => (
             <Collapse.Panel header={this.state.posts[key].title} key={this.state.posts[key].id}>
-              <Post url={'/buildLog/'} post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
+              <BuildLog url={'/buildLog/'} post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
             </Collapse.Panel>
           ))}
         </Collapse>
@@ -50,4 +50,4 @@ class BlogPosts extends Component {
   }
 }
 
-export default BlogPosts;
+export default BuildLogPosts;

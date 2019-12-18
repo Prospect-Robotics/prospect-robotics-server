@@ -36,7 +36,7 @@ class BlogPosts extends Component {
         <Collapse accordian style={{clear: 'both'}}>
           {Object.keys(posts).reverse().map(key => (
             <Collapse.Panel header={this.state.posts[key].title} key={this.state.posts[key].id}>
-              <Post url={'/blog/'} post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
+              <Post url={'/buildLog/'} post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
             </Collapse.Panel>
           ))}
         </Collapse>

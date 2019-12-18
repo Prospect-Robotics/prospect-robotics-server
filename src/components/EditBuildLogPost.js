@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Col, DatePicker, Form, Icon, Input, message, Modal, Row, Upload} from 'antd';
 import moment from 'moment';
-import '../styles/edit-blog-post.scss';
+import '../styles/edit-build-log-post.scss';
 
 const {TextArea} = Input;
 
@@ -129,7 +129,7 @@ class EditBuildLogPost extends Component {
     return (
       <Modal title={this.props.mode === "create" ? "Create New Build Log Post" : "Edit New Build Log Post"}
              visible={this.props.visible} onCancel={this.props.onCancel} footer={null}>
-        <Form onSubmit={this.handleSubmit} className={'edit-blog-post-form'}>
+        <Form onSubmit={this.handleSubmit} className={'edit-build-log-post-form'}>
           <Row gutter={8}>
             <Col xs={16}>
               <Form.Item
