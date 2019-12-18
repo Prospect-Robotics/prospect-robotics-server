@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Button, Collapse} from "antd";
-import EditBlogPost from "./EditBlogPost";
+import EditBuildLogPost from "./EditBuildLogPost.js";
 import Post from "./Post";
 
 class BlogPosts extends Component {
   state = {
     posts: {},
-    newBlogPostVisible: false
+    newBuildLogPostVisible: false
   };
 
   getPosts() {
-    fetch('/blogImages')
+    fetch('/buildLogImages')
       .then(res => res.json())
       .then(posts => {
         this.setState({posts});
@@ -25,24 +25,24 @@ class BlogPosts extends Component {
     let {posts} = this.state;
 
     return (
-      <div style={{marginTop: 16}}>
+      <div>
         <div>
           <h1 style={{float: 'left'}}>
-            Blog
+            Build Log
           </h1>
           <Button icon={"plus"} type={"primary"} style={{float: 'right'}}
-                  onClick={() => this.setState({newBlogPostVisible: true})}>New Post</Button>
+                  onClick={() => this.setState({newBuildLogPostVisible: true})}>New Post</Button>
         </div>
         <Collapse accordian style={{clear: 'both'}}>
           {Object.keys(posts).reverse().map(key => (
             <Collapse.Panel header={this.state.posts[key].title} key={this.state.posts[key].id}>
-              <Post url={'/blog/'} post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
+              <Post url={'/buildLog/'} post={this.state.posts[key]} id={key} key={key} onEdit={() => this.getPosts()}/>
             </Collapse.Panel>
           ))}
         </Collapse>
-        <EditBlogPost mode={"create"} visible={this.state.newBlogPostVisible}
-                      onCancel={() => this.setState({newBlogPostVisible: false})} onEdit={() => {
-          this.setState({newBlogPostVisible: false});
+        <EditBuildLogPost mode={"create"} visible={this.state.newBuildLogPostVisible}
+                      onCancel={() => this.setState({newBuildLogPostVisible: false})} onEdit={() => {
+          this.setState({newBuildLogPostVisible: false});
           this.getPosts();
         }}/>
       </div>

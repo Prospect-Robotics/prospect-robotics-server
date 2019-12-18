@@ -9,7 +9,7 @@ class Post extends Component {
   };
 
   onDelete() {
-    fetch('/blog/' + this.props.id, {
+    fetch(this.props.url + this.props.id, {
       method: 'DELETE'
     }).then(() => {
       this.props.onEdit();
