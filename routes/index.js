@@ -175,7 +175,7 @@ router.post('/buildLog', (req, res) => {
     return res.status(200).send('No files were uploaded.');
   }
 
-  // moving sent file into directory data/images/blog
+  // moving sent file into directory data/images/build-log
   let file = req.files.file;
   file.mv(path.join(__dirname, `../data/images/build-log/${req.body.fileName}`), function (err) {
     if (err) {
@@ -183,7 +183,7 @@ router.post('/buildLog', (req, res) => {
       return res.status(500).send(err);
     }
 
-    let buildLogJson = JSON.parse(fs.readFileSync(blogPath, 'utf8')); // read json
+    let buildLogJson = JSON.parse(fs.readFileSync(buildLogPath, 'utf8')); // read json
 
     let id = req.body.id || ID();
     buildLogJson[id] = { // assign new data

@@ -30,6 +30,9 @@ yarn-error.log*
 /data/blog.json
 /data/images/blog/*.jpg
 
+/data/build-log.json
+/data/images/build-log/*.jpg
+
 /cert.pem
 /key.pem
 
