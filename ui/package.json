@@ -1,0 +1,42 @@
+{
+  "name": "prospect-website-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "set PORT=3001 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "antd": "^3.10.7",
+    "node-sass": "^4.13.0",
+    "qrcode.react": "^1.0.0",
+    "react": "^16.6.3",
+    "react-autocomplete": "^1.8.1",
+    "react-dom": "^16.6.3",
+    "react-json-view": "^1.19.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.8",
+    "react-timestamp": "~4.4.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "proxy": "https://localhost:3000/",
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
