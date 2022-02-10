@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "antd": "^3.10.7",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "qrcode.react": "^1.0.0",
     "react": "^16.6.3",
     "react-autocomplete": "^1.8.1",
